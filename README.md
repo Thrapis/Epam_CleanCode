@@ -1,1 +1,2 @@
-# Epam_CleanCode
+# aircompany
+Project with "code smells" for refactoring
