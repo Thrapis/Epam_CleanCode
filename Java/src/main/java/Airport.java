@@ -1,13 +1,19 @@
+import Models.ClassificationLevel;
 import Planes.ExperimentalPlane;
 import Models.MilitaryType;
 import Planes.MilitaryPlane;
 import Planes.PassengerPlane;
 import Planes.Plane;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Airport {
     private List<? extends Plane> planes;
+
+    public Airport(List<? extends Plane> planes) {
+        this.planes = planes;
+    }
 
     public List<PassengerPlane> getPassangerPlanes() {
         List<PassengerPlane> passengerPlanes = new ArrayList<>();
@@ -116,13 +122,53 @@ public class Airport {
     @Override
     public String toString() {
         return "Airport{" +
-                "Planes=" + planes.toString() +
-                '}';
+                "Planes=" + planes.toString() + '}';
     }
 
-    //Constructor
-    public Airport(List<? extends Plane> planes) {
-        this.planes = planes;
+    public boolean isOnlyTransportMilitaryPlanes() {
+        for (int i = 0; i < planes.size(); i++) {
+            if (planes.get(i) instanceof MilitaryPlane){
+                MilitaryPlane militaryPlane = (MilitaryPlane)planes.get(i);
+                if (militaryPlane.getMilitaryType() != MilitaryType.TRANSPORT){
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
+    public boolean isSortedByMaxCapacity() {
+        for (int i = 0; i < planes.size() - 1; i++) {
+            if (planes.get(i).getMaxLoadCapacity() > planes.get(i + 1).getMaxLoadCapacity()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasMilitaryBombers() {
+        for (int i = 0; i < planes.size(); i++) {
+            if (planes.get(i) instanceof MilitaryPlane){
+                MilitaryPlane militaryPlane = (MilitaryPlane)planes.get(i);
+                if (militaryPlane.getMilitaryType() == MilitaryType.BOMBER){
+                    return true;
+                }
+            }
+        }
+        return  false;
+    }
+
+    public boolean hasExperimentalPlanesWithClassificationLevelHigherThan(ClassificationLevel classificationLevelBorder) {
+        for (int i = 0; i < planes.size(); i++) {
+            if (planes.get(i) instanceof ExperimentalPlane) {
+                ExperimentalPlane experimentalPlane = (ExperimentalPlane)planes.get(i);
+                if (experimentalPlane.getClassificationLevel().ordinal() > classificationLevelBorder.ordinal()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
