@@ -35,8 +35,7 @@ abstract public class Plane {
                 "model='" + model + '\'' +
                 ", maxSpeed=" + maxSpeed +
                 ", maxFlightDistance=" + maxFlightDistance +
-                ", maxLoadCapacity=" + maxLoadCapacity +
-                '}';
+                ", maxLoadCapacity=" + maxLoadCapacity + '}';
     }
 
     @Override
