@@ -1,11 +1,10 @@
-import Models.ClassificationLevel;
-import Planes.ExperimentalPlane;
-import Models.MilitaryType;
-import Planes.MilitaryPlane;
-import Planes.PassengerPlane;
-import Planes.Plane;
+import model.ClassificationLevel;
+import plane.ExperimentalPlane;
+import model.MilitaryType;
+import plane.MilitaryPlane;
+import plane.PassengerPlane;
+import plane.Plane;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Airport {
